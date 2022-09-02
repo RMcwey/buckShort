@@ -1,9 +1,12 @@
 [
   {
-    "userId": "001",
     "name": "Ross McWey",
     "email": "rmcwey@hotmail.com",
-    "password": "password1",
-    "screenName": "RM60"
+    "password": "password1"
+  },
+  {
+    "name": "Alex Harkins",
+    "email": "amachkel@gmail.com",
+    "password": "password1"
   }
 ]
