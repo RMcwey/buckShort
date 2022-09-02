@@ -11,9 +11,12 @@ const resolvers = {
       .populate({
         path: "posts",
         populate: "author"
+      })
+      .populate({
+        path: "comment",
+        ref: "author"
       });
     },
-
     allUsers: async () => {
       return await User.find({})
       .populate("posts")
@@ -27,29 +30,43 @@ const resolvers = {
         populate: "author"
       })
     },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findOne({_id: context.user._id})
-        .populate("posts")
-        .populate({
-          path: "post",
-          populate: "author"
-        })
-        .populate("comments")
-        .populate({
-          path: "comment",
-          populate: "author"
-        })
-      }
-      throw new AuthenticationError("You need to be logged in!")
+    post: async () => {
+      return await Post.findOne({_id: postId})
+      .populate('comments')
+      .populate({
+        path: 'comment',
+        populate: 'originalPost'
+      })
+    },
+    allPost: async () => {
+      return await Post.find({})
+      .populate('comments')
+      .populate({
+        path: 'comment',
+        populate: 'originalPost'
+      })
+    },
+    postsByAuthor: async () => {
+      return await Post.findById({author: User._id});
+    },
+    comment: async () => {
+      return await Comment.findOne({_id: commentId})
+      .populate("originalPost")
+      .populate({
+        path: "post",
+        populate: "comments"
+      })
+    },
+    allComment: async () => {
+      return await Comment.findOne({})
+      .populate("originalPost")
+      .populate({
+        path: "post",
+        populate: "comments"
+      })
     }
-    // matchups: async (parent, { _id }) => {
-    //   const params = _id ? { _id } : {};
-    //   return Matchup.find(params);
-    // },
   },
   Mutation: {
-
     addUser: async (parent, {name, email, password}) => {
       const user = await User.create({name, email, password});
       const token = signToken(user);
@@ -96,18 +113,6 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in");
     },
-    // createMatchup: async (parent, args) => {
-    //   const matchup = await Matchup.create(args);
-    //   return matchup;
-    // },
-    // createVote: async (parent, { _id, techNum }) => {
-    //   const vote = await Matchup.findOneAndUpdate(
-    //     { _id },
-    //     { $inc: { [`tech${techNum}_votes`]: 1 } },
-    //     { new: true }
-    //   );
-    //   return vote;
-    // },
   },
 };
 
