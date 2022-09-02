@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "101",
+    "title": "The First Test",
+    "author": "001",
+    "content": "This is the first test post for a buck short productions",
+    "comments": "201"
+  },
+  {
+    "_id": "102",
+    "title": "The Second Test",
+    "author": "001",
+    "content": "This is the second test post for a buck short productions",
+    "comments": "202"
+  }
+]
