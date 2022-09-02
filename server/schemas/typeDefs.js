@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -8,14 +8,14 @@ const typeDefs = gql`
     password: String
     posts: [Post]
     comments: [Comment]
-  }  
+  }
 
   type Post {
     _id: ID
     title: String
     author: User
     content: String
-    comments:[Comment]
+    comments: [Comment]
   }
 
   type Comment {
@@ -32,12 +32,11 @@ const typeDefs = gql`
   }
 
   type Query {
-    user (userId: ID!): User
+    user(name: String!): User
     allUsers: [User]
-    post (postId: ID!): Post
-    allPosts: [Post]
-    # postsByAuthor (authorId: ID!): [Post]
-    comment (commentId: ID!): Comment
+    post(postId: ID!): Post
+    allPosts(name: String!): [Post]
+    comment(commentId: ID!): Comment
     allComments: [Comment]
   }
 
@@ -56,7 +55,6 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-
+// # postsByAuthor (authorId: ID!): [Post]
 // createMatchup(tech1: String!, tech2: String!): Matchup
 // createVote(_id: String!, techNum: Int!): Matchup
