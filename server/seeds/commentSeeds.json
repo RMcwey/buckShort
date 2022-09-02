@@ -1,10 +1,12 @@
 [
   {
-    "_id": "201",
     "commentId": "201",
-    "author": "001",
     "title": "The first comment!",
-    "content": "This is the first comment on a buck short productions",
-    "originalPost": "101"
+    "content": "This is the first comment on a buck short productions"
+  },
+  {
+    "commentId": "202",
+    "title": "The second comment!",
+    "content": "This is the second comment on a buck short productions"
   }
 ]

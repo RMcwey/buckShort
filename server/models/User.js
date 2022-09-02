@@ -20,13 +20,15 @@ const userSchema = new Schema({
     minlength: 5,
   },
   posts: [{
-    type: Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Post'
   }],
-  comments: [{
-    type: Types.ObjectId,
-    ref: 'Post'
-  }]
+  comments: [
+    {
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+    }
+  ]
 });
 
 // compare the incoming password with the hashed password

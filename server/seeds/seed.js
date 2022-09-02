@@ -2,6 +2,7 @@ const db = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const postSeeds = require('./postSeeds.json');
+const commentSeeds = require('./commentSeeds.json');
 
 db.once('open', async () => {
   try {
@@ -9,6 +10,8 @@ db.once('open', async () => {
     await User.create(userSeeds);
     await Post.deleteMany({});
     await Post.create(postSeeds);
+    await Comment.deleteMany({});
+    await Comment.create(commentSeeds);
 
     console.log('all done');
     process.exit(0);

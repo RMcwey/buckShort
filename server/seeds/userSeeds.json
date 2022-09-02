@@ -1,17 +1,9 @@
 [
   {
-    "_id": "001",
     "userId": "001",
     "name": "Ross McWey",
-    "email": "password1",
-    "screenName": "RM60",
-    "posts" : [
-      {
-        "postId": "101"
-      },
-      {
-        "postId": "102"
-      }
-    ]
+    "email": "rmcwey@hotmail.com",
+    "password": "password1",
+    "screenName": "RM60"
   }
 ]
