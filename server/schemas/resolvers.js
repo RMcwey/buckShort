@@ -92,7 +92,7 @@ const resolvers = {
               name: args.name,
               email: args.email,
               password: args.password,
-              screenName: args.screenName,
+              // screenName: args.screenName,
             },
           },
           { returnDocument: "after" }
