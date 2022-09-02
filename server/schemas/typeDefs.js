@@ -36,7 +36,7 @@ const typeDefs = gql`
     allUsers: [User]
     post (postId: ID!): Post
     allPosts: [Post]
-    postsByAuthor (authorId: ID!): [Post]
+    # postsByAuthor (authorId: ID!): [Post]
     comment (commentId: ID!): Comment
     allComments: [Comment]
   }
