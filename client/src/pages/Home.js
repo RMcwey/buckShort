@@ -58,7 +58,7 @@ export default function Home() {
             className="collapse"
             in={checked}
             {...(checked ? { timeout: 1000 } : {})}
-            collapsedSize={0}
+            collapsedSize={50}
             // sx={{ mx: "auto", display: "flex", justifyContent: "center" }}
           >
             {/* {Auth.loggedIn() ? (
@@ -109,7 +109,7 @@ export default function Home() {
                 <ExpandMoreIcon
                   sx={{
                     fontSize: "8rem",
-                    color: "#FFF",
+                    color: "primary.contrastText",
                     justifyContent: "flex-end",
                     alignItems: "center",
                   }}
@@ -129,9 +129,9 @@ export default function Home() {
           margin: "2em",
         }}
       >
-        <Typography color={"#FFF"}>
+        <Typography sx={{ color: "primary.contrastText", fontSize: 26 }}>
           A Buck Short Productions is a film production company based out of
-          Hampton, Georgia. Writer and director, Richard Tanner, began A Buck
+          Hampton, Georgia. Writer and director Richard Tanner began A Buck
           Short after an unfortunate run-in with a cold-hearted bitch. Though
           the journey was long and painful, they emerged from the toxic waste as
           film makers, a strong team, and kick-ass kung-fu masters!
