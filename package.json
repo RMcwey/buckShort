@@ -17,6 +17,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "nlpcloud": "^1.0.23"
+    "nlpcloud": "^1.0.23",
+    "uuidv4": "^6.2.13"
   }
 }

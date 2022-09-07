@@ -10,20 +10,39 @@ import franken2 from "../../assets/images/photos/franken-2.jpg";
 import franken3 from "../../assets/images/photos/franken-3.png";
 import franken5 from "../../assets/images/photos/franken-5.jpg";
 import franken6 from "../../assets/images/photos/franken-6.jpg";
+import mother1 from "../../assets/images/photos/mother-1.jpg";
+import mother2 from "../../assets/images/photos/mother-2.jpg";
+import mother3 from "../../assets/images/photos/mother-3.jpg";
+import productions from "../../assets/images/photos/productions-crew.jpg";
+import motherPoster from "../../assets/images/photos/mother-poster.jpg";
+import roomPoster from "../../assets/images/photos/room-poster.jpg";
+import frankenPoster from "../../assets/images/photos/franken-poster.jpg";
+import richard from "../../assets/images/photos/richard.jpg";
+import { v4 as uuidv4 } from "uuid";
 
-const pictureArray = [
-  { id: 1, photo: bts1, label: "image1" },
-  { id: 2, photo: bts2, label: "image2" },
-  { id: 3, photo: copy2, label: "image3" },
-  { id: 4, photo: danSamJoe, label: "image4" },
-  { id: 5, photo: danielLibby, label: "image5" },
-  { id: 6, photo: erinBrown, label: "image6" },
-  { id: 7, photo: bts3, label: "image7" },
-  { id: 8, photo: franken1, label: "image8" },
-  { id: 9, photo: franken2, label: "image9" },
-  { id: 10, photo: franken3, label: "image10" },
-  { id: 11, photo: franken5, label: "image11" },
-  { id: 12, photo: franken6, label: "image12" },
+const projectArray = [
+  { id: uuidv4(), photo: motherPoster, label: "mother noose poster" },
+  { id: uuidv4(), photo: roomPoster, label: "room for rent poster" },
+  { id: uuidv4(), photo: frankenPoster, label: "frankenthug poster" },
 ];
 
-export default pictureArray;
+const pictureArray = [
+  { id: uuidv4(), photo: mother1, label: "image0" },
+  { id: uuidv4(), photo: bts1, label: "image1" },
+  { id: uuidv4(), photo: bts2, label: "image2" },
+  { id: uuidv4(), photo: copy2, label: "image3" },
+  { id: uuidv4(), photo: mother2, label: "image4" },
+  { id: uuidv4(), photo: danielLibby, label: "image5" },
+  { id: uuidv4(), photo: erinBrown, label: "image6" },
+  { id: uuidv4(), photo: bts3, label: "image7" },
+  { id: uuidv4(), photo: franken1, label: "image8" },
+  { id: uuidv4(), photo: franken2, label: "image9" },
+  { id: uuidv4(), photo: franken3, label: "image10" },
+  { id: uuidv4(), photo: franken5, label: "image11" },
+  { id: uuidv4(), photo: mother3, label: "image12" },
+  { id: uuidv4(), photo: danSamJoe, label: "image13" },
+  { id: uuidv4(), photo: franken6, label: "image14" },
+  { id: uuidv4(), photo: productions, label: "image15" },
+];
+
+export { pictureArray, projectArray };

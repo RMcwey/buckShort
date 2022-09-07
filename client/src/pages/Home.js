@@ -115,6 +115,9 @@ export default function Home() {
                   }}
                 />
               </IconButton>
+              <Typography sx={{ color: "primary.contrastText", fontSize: 26 }}>
+                About Us
+              </Typography>
             </Scroll>
           </Collapse>
         </AlignedDiv>

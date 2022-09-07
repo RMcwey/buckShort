@@ -1,5 +1,5 @@
 import React from "react";
-import pictureArray from "./pictureArray";
+import { projectArray, pictureArray } from "./pictureArray";
 import { useTheme } from "@emotion/react";
 import {
   Stack,
@@ -12,15 +12,16 @@ import {
 export default function MuiImageList() {
   //breakpoint at medium screen: grid has 2 columns, then 4 columns
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("md"));
-
+  const matchesMd = useMediaQuery(theme.breakpoints.up("md"));
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Stack spacing={4}>
-      <Box sx={{ width: "90vw", height: "100vh", overFlowY: "hidden" }}>
-        <ImageList variant="masonry" cols={matches ? 4 : 2} gap={8}>
-          {pictureArray.map((item) => (
+      <Box sx={{ width: "80vw", margin: "auto" }}>
+        <ImageList cols={matchesMd ? 3 : matchesSm ? 1 : 2} gap={30}>
+          {projectArray.map((item) => (
             <ImageListItem key={item.id}>
               <img
+                style={{ borderRadius: "3px" }}
                 src={item.photo}
                 srcSet={item.photo}
                 alt={item.label}
