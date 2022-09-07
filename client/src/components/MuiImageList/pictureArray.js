@@ -9,57 +9,21 @@ import franken1 from "../../assets/images/photos/franken-1.jpg";
 import franken2 from "../../assets/images/photos/franken-2.jpg";
 import franken3 from "../../assets/images/photos/franken-3.png";
 import franken5 from "../../assets/images/photos/franken-5.jpg";
-import franken7 from "../../assets/images/photos/franken-7.jpg";
+import franken6 from "../../assets/images/photos/franken-6.jpg";
 
 const pictureArray = [
-  {
-    photo: bts1,
-    label: "image1",
-  },
-  {
-    photo: bts1,
-    label: "image2",
-  },
-  {
-    photo: bts1,
-    label: "image3",
-  },
-  {
-    photo: bts1,
-    label: "image4",
-  },
-  {
-    photo: bts1,
-    label: "image5",
-  },
-  {
-    photo: bts1,
-    label: "image6",
-  },
-  {
-    photo: bts1,
-    label: "image7",
-  },
-  {
-    photo: bts1,
-    label: "image8",
-  },
-  {
-    photo: bts1,
-    label: "image9",
-  },
-  {
-    photo: bts1,
-    label: "image10",
-  },
-  {
-    photo: bts1,
-    label: "image11",
-  },
-  {
-    photo: bts1,
-    label: "image12",
-  },
+  { id: 1, photo: bts1, label: "image1" },
+  { id: 2, photo: bts2, label: "image2" },
+  { id: 3, photo: copy2, label: "image3" },
+  { id: 4, photo: danSamJoe, label: "image4" },
+  { id: 5, photo: danielLibby, label: "image5" },
+  { id: 6, photo: erinBrown, label: "image6" },
+  { id: 7, photo: bts3, label: "image7" },
+  { id: 8, photo: franken1, label: "image8" },
+  { id: 9, photo: franken2, label: "image9" },
+  { id: 10, photo: franken3, label: "image10" },
+  { id: 11, photo: franken5, label: "image11" },
+  { id: 12, photo: franken6, label: "image12" },
 ];
 
 export default pictureArray;
