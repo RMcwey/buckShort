@@ -16,6 +16,7 @@ import GlitchFx from "react-glitch-fx/lib/GlitchFx";
 import Alert from "@mui/material/Alert";
 import MuiImageList from "../components/MuiImageList/MuiImageList";
 // import Auth from "../utils/auth";
+import richard from "../assets/images/photos/richard.jpg";
 
 const BackgroundStyled = styled("div")({
   minHeight: "100%",
@@ -132,14 +133,30 @@ export default function Home() {
           margin: "2em",
         }}
       >
-        <Typography sx={{ color: "primary.contrastText", fontSize: 26 }}>
-          A Buck Short Productions is a film production company based out of
-          Hampton, Georgia. Writer and director Richard Tanner began A Buck
-          Short after an unfortunate run-in with a cold-hearted bitch. Though
-          the journey was long and painful, they emerged from the toxic waste as
-          film makers, a strong team, and kick-ass kung-fu masters!
-        </Typography>
-
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            margin: "2em",
+          }}
+        >
+          <Typography
+            sx={{
+              maxWidth: "45%",
+              color: "primary.contrastText",
+              fontSize: 26,
+            }}
+          >
+            A Buck Short Productions is a film production company based out of
+            Hampton, Georgia. Writer and director Richard Tanner began A Buck
+            Short after an unfortunate run-in with a cold-hearted bitch. Though
+            the journey was long and painful, they emerged from the toxic waste
+            as film makers, a strong team, and kick-ass kung-fu masters!
+          </Typography>
+          <img src={richard} />
+        </Box>
         <MuiImageList />
       </Box>
     </BackgroundStyled>

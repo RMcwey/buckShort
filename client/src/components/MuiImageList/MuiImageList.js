@@ -6,6 +6,7 @@ import {
   ImageList,
   useMediaQuery,
   ImageListItem,
+  Typography,
   Box,
 } from "@mui/material";
 
@@ -17,6 +18,15 @@ export default function MuiImageList() {
   return (
     <Stack spacing={4}>
       <Box sx={{ width: "80vw", margin: "auto" }}>
+        <Typography
+          sx={{
+            textAlign: "center",
+            color: "primary.contrastText",
+            fontSize: 26,
+          }}
+        >
+          Recent Films
+        </Typography>
         <ImageList cols={matchesMd ? 3 : matchesSm ? 1 : 2} gap={30}>
           {projectArray.map((item) => (
             <ImageListItem key={item.id}>
