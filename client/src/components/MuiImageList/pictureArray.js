@@ -3,7 +3,7 @@ import bts2 from "../../assets/images/photos/bts-2.jpg";
 import copy2 from "../../assets/images/photos/copy-2.jpg";
 import danSamJoe from "../../assets/images/photos/dan-sam-joe.jpg";
 import danielLibby from "../../assets/images/photos/daniel-libby.jpg";
-import erinBrown from "../../assets/images/photos/erin-brown.jpg";
+import erinBrown from "../../assets/images/photos/erin-brown-1.jpg";
 import bts3 from "../../assets/images/photos/bts-3.jpg";
 import franken1 from "../../assets/images/photos/franken-1.jpg";
 import franken2 from "../../assets/images/photos/franken-2.jpg";
