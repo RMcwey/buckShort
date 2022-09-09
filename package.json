@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "nlpcloud": "^1.0.23",
+    "react-scroll": "^1.8.7",
     "uuidv4": "^6.2.13"
   }
 }
