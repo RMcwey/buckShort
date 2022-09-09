@@ -149,13 +149,20 @@ export default function Home() {
               fontSize: 26,
             }}
           >
-            A Buck Short Productions is a film production company based out of
-            Hampton, Georgia. Writer and director Richard Tanner began A Buck
-            Short after an unfortunate run-in with a cold-hearted bitch. Though
-            the journey was long and painful, they emerged from the toxic waste
-            as film makers, a strong team, and kick-ass kung-fu masters!
+            <span style={{ fontSize: 32, fontWeight: "bolder" }}>
+              A Buck Short Productions
+            </span>{" "}
+            is a film production company based out of Hampton, Georgia. Writer
+            and director Richard Tanner began A Buck Short after an unfortunate
+            run-in with a cold-hearted bitch. Though the journey was long and
+            painful, they emerged from the toxic waste as film makers, a strong
+            team, and kick-ass kung-fu masters!
           </Typography>
-          <img src={richard} />
+          <img
+            src={richard}
+            style={{ borderRadius: "3px", boxShadow: "2px 2px 8px #FFF" }}
+            alt="Richard Tanner at The Black Cat Picture Show"
+          />
         </Box>
         <MuiImageList />
       </Box>
