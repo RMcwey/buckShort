@@ -13,7 +13,7 @@ const typeDefs = gql`
   type Post {
     _id: ID
     title: String
-    author: User
+    author: String
     content: String
     comments: [Comment]
   }
@@ -21,7 +21,7 @@ const typeDefs = gql`
   type Comment {
     _id: ID
     title: String
-    author: User
+    author: String
     content: String
     originalPost: [Post]
   }
