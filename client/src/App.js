@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import BsAdmin from "./pages/BsAdmin";
 import {
   ApolloClient,
   InMemoryCache,
@@ -45,6 +46,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/BsAdmin" element={<BsAdmin />} />
             <Route path="contact" element={<Contact />} />
           </Routes>
         </Router>
