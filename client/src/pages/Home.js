@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Background from "../assets/images/background.png";
 import Logo from "../assets/images/Logos/a-buck-3-removebg.png";
-// import { Link as Scroll } from "react-scroll";
+import { Link as Scroll } from "react-scroll";
 import { styled } from "@mui/system";
-import { CssBaseline, Box, Collapse, IconButton } from "@mui/material";
+import {
+  CssBaseline,
+  Box,
+  Collapse,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GlitchFx from "react-glitch-fx/lib/GlitchFx";
 import Alert from "@mui/material/Alert";
+import MuiImageList from "../components/MuiImageList/MuiImageList";
 // import Auth from "../utils/auth";
+import richard from "../assets/images/photos/richard.jpg";
 
 const BackgroundStyled = styled("div")({
-  minHeight: "100vh",
+  minHeight: "100%",
   backgroundImage: `url(${Background})`,
   backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
+  backgroundPosition: "center center",
   backgroundSize: "cover",
-  overflowX: "hidden",
+  overflow: "hidden",
+  backgroundAttachment: "fixed",
 });
 
 const AlignedDiv = styled("div")({
@@ -50,7 +59,7 @@ export default function Home() {
             className="collapse"
             in={checked}
             {...(checked ? { timeout: 1000 } : {})}
-            collapsedSize={0}
+            collapsedSize={50}
             // sx={{ mx: "auto", display: "flex", justifyContent: "center" }}
           >
             {/* {Auth.loggedIn() ? (
@@ -95,32 +104,68 @@ export default function Home() {
             in={checked}
             {...(checked ? { timeout: 1000 } : {})}
             collapsedSize={50}
-            // sx={{ mx: "auto", display: "flex", justifyContent: "center" }}
           >
-            <IconButton>
-              <ExpandMoreIcon
-                sx={{
-                  fontSize: "8rem",
-                  color: "#FFF",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                }}
-              />
-            </IconButton>
+            <Scroll to="about" smooth={true}>
+              <IconButton>
+                <ExpandMoreIcon
+                  sx={{
+                    fontSize: "8rem",
+                    color: "primary.contrastText",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                  }}
+                />
+              </IconButton>
+              <Typography sx={{ color: "primary.contrastText", fontSize: 26 }}>
+                About Us
+              </Typography>
+            </Scroll>
           </Collapse>
         </AlignedDiv>
-        {/* </Scroll> */}
+      </Box>
+      <Box
+        id="about"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          minHeight: "100vh",
+          margin: "2em",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            alignItems: "center",
+            margin: "2em",
+          }}
+        >
+          <Typography
+            sx={{
+              maxWidth: "45%",
+              color: "primary.contrastText",
+              fontSize: 26,
+            }}
+          >
+            <span style={{ fontSize: 32, fontWeight: "bolder" }}>
+              A Buck Short Productions
+            </span>{" "}
+            is a film production company based out of Hampton, Georgia. Writer
+            and director Richard Tanner began A Buck Short after an unfortunate
+            run-in with a cold-hearted bitch. Though the journey was long and
+            painful, they emerged from the toxic waste as film makers, a strong
+            team, and kick-ass kung-fu masters!
+          </Typography>
+          <img
+            src={richard}
+            style={{ borderRadius: "3px", boxShadow: "2px 2px 8px #FFF" }}
+            alt="Richard Tanner at The Black Cat Picture Show"
+          />
+        </Box>
+        <MuiImageList />
       </Box>
     </BackgroundStyled>
   );
-
-  /* <Box sx={{ width: 300, height: 300 }}>
-        <Typography color={"#000000"}>
-          A Buck Short Productions is a film production company based out of
-          Hampton, Georgia. Writer and director, Richard Tanner, began A Buck
-          Short after an unfortunate run-in with a cold-hearted bitch. Though
-          the journey was long and painful, they emerged from the toxic waste as
-          film makers, a strong team, and kick-ass kung-fu masters!
-        </Typography>
-      </Box> */
 }
