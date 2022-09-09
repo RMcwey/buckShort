@@ -5,25 +5,21 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return await User.findOne({ _id: userId })
-      .populate("comments")
-      .populate({
+      return await User.findOne({ _id: userId }).populate("comments").populate({
         path: "comments",
-        populate: "originalPost"
-      })
+        populate: "originalPost",
+      });
     },
     allUsers: async () => {
-      return await User.find({})
-        .populate("posts")
-        .populate("comments")
-        .populate({
-          path: "posts",
-          populate: "author",
-        })
-        .populate({
-          path: "comments",
-          populate: "author",
-        });
+      return await User.find({}).populate("posts").populate("comments");
+      // .populate({
+      //   path: "posts",
+      //   populate: "author",
+      // })
+      // .populate({
+      //   path: "comments",
+      //   populate: "author",
+      // });
     },
     post: async (parent, { postId }) => {
       return await Post.findOne({ _id: postId }).populate("comments").populate({
