@@ -6,16 +6,11 @@ const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
       return await User.findOne({ _id: userId })
-        .populate("posts")
-        .populate({
-          path: "posts",
-          populate: "author",
-        })
-        .populate("comments")
-        .populate({
-          path: "comment",
-          ref: "author",
-        });
+      .populate("comments")
+      .populate({
+        path: "comments",
+        populate: "originalPost"
+      })
     },
     allUsers: async () => {
       return await User.find({})
@@ -30,22 +25,22 @@ const resolvers = {
           populate: "author",
         });
     },
-    post: async () => {
+    post: async (parent, { postId }) => {
       return await Post.findOne({ _id: postId }).populate("comments").populate({
-        path: "comment",
+        path: "comments",
         populate: "originalPost",
       });
     },
     allPosts: async () => {
       return await Post.find({}).populate("comments").populate({
-        path: "comment",
+        path: "comments",
         populate: "originalPost",
       });
     },
     // postsByAuthor: async () => {
     //   return await Post.findById({author: User._id});
     // },
-    comment: async () => {
+    comment: async (parent, { commentId }) => {
       return await Comment.findOne({ _id: commentId })
         .populate("originalPost")
         .populate({
@@ -54,7 +49,7 @@ const resolvers = {
         });
     },
     allComments: async () => {
-      return await Comment.findOne({}).populate("originalPost").populate({
+      return await Comment.find({}).populate("originalPost").populate({
         path: "originalPost",
         populate: "comments",
       });
