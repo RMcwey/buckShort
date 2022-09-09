@@ -2,6 +2,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./assets/css/colorPalette";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import {
   ApolloClient,
@@ -44,6 +45,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="contact" element={<Contact />} />
           </Routes>
         </Router>
       </ApolloProvider>
