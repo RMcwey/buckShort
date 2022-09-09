@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./assets/css/colorPalette";
 import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import {
   ApolloClient,
@@ -40,6 +41,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <Router>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
