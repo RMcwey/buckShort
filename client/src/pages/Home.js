@@ -15,7 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GlitchFx from "react-glitch-fx/lib/GlitchFx";
 import Alert from "@mui/material/Alert";
 import MuiImageList from "../components/MuiImageList/MuiImageList";
-// import Auth from "../utils/auth";
+import Auth from "../utils/auth";
 import richard from "../assets/images/photos/richard.jpg";
 
 const BackgroundStyled = styled("div")({
@@ -62,7 +62,7 @@ export default function Home() {
             collapsedSize={50}
             // sx={{ mx: "auto", display: "flex", justifyContent: "center" }}
           >
-            {/* {Auth.loggedIn() ? (
+            {Auth.loggedIn() ? (
               <Collapse in={open} sx={{ mt: 4 }}>
                 <Alert
                   severity="success"
@@ -83,7 +83,7 @@ export default function Home() {
                   You are successfully logged in.
                 </Alert>
               </Collapse>
-            ) : null} */}
+            ) : null}
             <GlitchFx>
               <Box
                 component={"img"}
