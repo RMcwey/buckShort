@@ -98,6 +98,23 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in");
     },
+    addPost: async (parent, { title, content }, context) => {
+      if (context.user) {
+        const post = await Post.create({
+          title,
+          content,
+          author: context.user.name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { allPosts: post._id } }
+        );
+
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
 
