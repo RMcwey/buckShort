@@ -13,18 +13,18 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 
 export default function BlogForm() {
-  const [blogPostText, setBlogPostText] = useState("");
-  const [blogTitle, setBlogTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
-        const { posts } = cache.readQuery({ query: QUERY_POSTS });
+        const { allPosts } = cache.readQuery({ query: QUERY_POSTS });
 
         cache.writeQuery({
           query: QUERY_POSTS,
-          data: { posts: [addPost, ...posts] },
+          data: { allPosts: [addPost, ...allPosts] },
         });
       } catch (e) {
         console.error(e);
@@ -36,14 +36,15 @@ export default function BlogForm() {
     event.preventDefault();
 
     try {
-      const { data } = await addPost({
+      await addPost({
         variables: {
-          blogPostText,
-          postAuthor: Auth.getProfile().data.firstName,
+          title,
+          content,
+          author: Auth.getProfile().data.name,
         },
       });
 
-      setBlogPostText("");
+      setContent("");
     } catch (err) {
       console.error(err);
     }
@@ -52,9 +53,11 @@ export default function BlogForm() {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "blogPostText" && value.length <= 1000) {
-      setBlogPostText(value);
+    if (name === "content" && value.length <= 1000) {
+      setContent(value);
       setCharacterCount(value.length);
+    } else if (name === "title") {
+      setTitle(value);
     }
   };
   return (
@@ -82,10 +85,10 @@ export default function BlogForm() {
             >
               <TextField
                 type="text"
-                name="blogTitle"
+                name="title"
                 placeholder="Blog Title"
                 className="form-input"
-                value={blogTitle}
+                value={title}
                 onChange={handleChange}
               ></TextField>
               Character Count: {characterCount}/1000
@@ -93,13 +96,21 @@ export default function BlogForm() {
             <TextareaAutosize
               aria-label="minimum height"
               minRows={5}
-              name="blogPostText"
+              name="content"
               placeholder="Enter your blog post..."
               className="form-input"
-              value={blogPostText}
+              value={content}
               onChange={handleChange}
             ></TextareaAutosize>
-            <Button sx={{ mt: 1 }} type="submit" variant="contained">
+            <Button
+              sx={{ mt: 1 }}
+              type="submit"
+              variant="contained"
+              onClick={() => {
+                console.log(content);
+                console.log(title);
+              }}
+            >
               <SendIcon color="primary.main" />
             </Button>
           </Box>
