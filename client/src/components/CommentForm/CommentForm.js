@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import MessageIcon from "@mui/icons-material/Message";
-
 import { ADD_COMMENT } from "../../utils/mutations";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -13,6 +12,7 @@ import Typography from "@mui/material/Typography";
 
 const CommentForm = ({ postId }) => {
   const [content, setContent] = useState("");
+  const [author, setAuthor] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addComment, { error }] = useMutation(ADD_COMMENT);
@@ -26,6 +26,7 @@ const CommentForm = ({ postId }) => {
           postId,
           content,
           author,
+          originalPost,
         },
       });
 
@@ -41,6 +42,9 @@ const CommentForm = ({ postId }) => {
     if (name === "content" && value.length <= 280) {
       setContent(value);
       setCharacterCount(value.length);
+    }
+    if (name === "author") {
+      setAuthor(value);
     }
   };
 
@@ -78,7 +82,24 @@ const CommentForm = ({ postId }) => {
           value={content}
           onChange={handleChange}
         ></TextField>
-        <Button sx={{ mt: 1 }} type="submit" variant="contained" size="medium">
+        <TextField
+          type="text"
+          name="author"
+          placeholder="Add your name"
+          className="form-input"
+          value={author}
+          onChange={handleChange}
+        ></TextField>
+        <Button
+          sx={{ mt: 1 }}
+          type="submit"
+          variant="contained"
+          size="medium"
+          onClick={() => {
+            console.log(content);
+            console.log(author);
+          }}
+        >
           <MessageIcon color="#6B3567" size="lg" />
         </Button>
       </Box>

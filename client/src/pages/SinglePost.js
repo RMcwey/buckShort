@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 // import CommentList from "../components/CommentList";
-// import CommentForm from "../components/CommentForm";
+import CommentForm from "../components/CommentForm/CommentForm";
 import { QUERY_SINGLE_POST } from "../utils/queries";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -47,7 +47,7 @@ const SinglePost = () => {
           <Typography variant="body2">Posted by {post.author}</Typography>
         </CardContent>
       </Card>
-      {/* <Card
+      <Card
         sx={{
           minWidth: 275,
           p: 2,
@@ -60,10 +60,10 @@ const SinglePost = () => {
       >
         <CardContent>
           {" "}
-          <CommentList comments={post.comments} />
+          {/* <CommentList comments={post.comments} /> */}
           <CommentForm postId={post._id} sx={{ justifyContent: "center" }} />
         </CardContent>
-      </Card> */}
+      </Card>
     </div>
   );
 };
