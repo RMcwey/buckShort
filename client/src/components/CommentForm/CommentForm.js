@@ -26,7 +26,6 @@ const CommentForm = ({ postId }) => {
           postId,
           content,
           author,
-          originalPost,
         },
       });
 

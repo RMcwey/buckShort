@@ -1,55 +1,35 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post, Comment } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return await User.findOne({ _id: userId }).populate("comments").populate({
-        path: "comments",
-        populate: "originalPost",
-      });
+      return await User.findOne({ _id: userId }).populate("posts");
     },
     allUsers: async () => {
-      return await User.find({}).populate("posts").populate("comments");
-      // .populate({
-      //   path: "posts",
-      //   populate: "author",
-      // })
-      // .populate({
-      //   path: "comments",
-      //   populate: "author",
-      // });
+      return await User.find().populate("posts");
     },
     post: async (parent, { postId }) => {
-      return await Post.findOne({ _id: postId }).populate("comments").populate({
-        path: "comments",
-        populate: "originalPost",
-      });
+      return await Post.findOne({ _id: postId });
     },
-    allPosts: async () => {
-      return await Post.find({}).populate("comments").populate({
-        path: "comments",
-        populate: "originalPost",
-      });
+    allPosts: async (parent, { userId }) => {
+      return await Post.find(params).populate("posts");
     },
-    // postsByAuthor: async () => {
-    //   return await Post.findById({author: User._id});
-    // },
-    comment: async (parent, { commentId }) => {
-      return await Comment.findOne({ _id: commentId })
-        .populate("originalPost")
-        .populate({
-          path: "originalPost",
-          populate: "comments",
-        });
-    },
-    allComments: async () => {
-      return await Comment.find({}).populate("originalPost").populate({
-        path: "originalPost",
-        populate: "comments",
-      });
-    },
+    //   comment: async (parent, { commentId }) => {
+    //     return await Comment.findOne({ _id: commentId })
+    //       .populate("originalPost")
+    //       .populate({
+    //         path: "originalPost",
+    //         populate: "comments",
+    //       });
+    //   },
+    //   allComments: async () => {
+    //     return await Comment.find({}).populate("originalPost").populate({
+    //       path: "originalPost",
+    //       populate: "comments",
+    //     });
+    //   },
   },
   Mutation: {
     addUser: async (parent, { name, email, password }) => {
@@ -83,7 +63,6 @@ const resolvers = {
               name: args.name,
               email: args.email,
               password: args.password,
-              // screenName: args.screenName,
             },
           },
           { returnDocument: "after" }
@@ -114,6 +93,20 @@ const resolvers = {
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    addComment: async (parent, { postId, content }) => {
+      return Post.findOneAndUpdate(
+        { _id: postId },
+        {
+          $addToSet: {
+            comments: { content, author },
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
     },
   },
 };

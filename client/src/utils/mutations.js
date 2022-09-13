@@ -33,9 +33,11 @@ export const ADD_COMMENT = gql`
       _id
       content
       author
-      originalPost {
-        _id
-      }
     }
   }
 `;
+
+// from ADD_COMMENT:
+// originalPost {
+//   _id
+// }
