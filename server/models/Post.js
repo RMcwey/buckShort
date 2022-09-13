@@ -28,11 +28,6 @@ const postSchema = new Schema({
         minlength: 1,
         maxlength: 30,
       },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
-      },
     },
   ],
 });

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import MessageIcon from "@mui/icons-material/Message";
 import { ADD_COMMENT } from "../../utils/mutations";
@@ -30,6 +29,7 @@ const CommentForm = ({ postId }) => {
       });
 
       setContent("");
+      setAuthor("");
     } catch (err) {
       console.error(err);
     }

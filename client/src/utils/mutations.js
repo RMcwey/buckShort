@@ -46,7 +46,6 @@ export const ADD_COMMENT = gql`
       _id
       content
       author
-      createdAt
     }
   }
 `;

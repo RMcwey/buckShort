@@ -41,7 +41,6 @@ export const QUERY_SINGLE_POST = gql`
         _id
         author
         content
-        createdAt
       }
     }
   }
