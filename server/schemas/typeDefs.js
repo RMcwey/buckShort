@@ -15,15 +15,14 @@ const typeDefs = gql`
     title: String
     author: String
     content: String
-    comments: [Comment]
+    comments: [Comment]!
   }
 
   type Comment {
     _id: ID
-    title: String
     author: String
     content: String
-    originalPost: [Post]
+    createdAt: String
   }
 
   type Auth {
@@ -36,8 +35,7 @@ const typeDefs = gql`
     allUsers: [User]
     post(postId: ID!): Post
     allPosts: [Post]
-    comment(commentId: ID!): Comment
-    allComments: [Comment]
+    me: User
   }
 
   type Mutation {
@@ -48,13 +46,10 @@ const typeDefs = gql`
     addPost(title: String, authorId: ID, content: String): Post
     updatePost(_id: ID!, name: String, content: String): Post
     removePost: Post
-    addComment(title: String, authorId: ID, content: String): Comment
-    updateComment(_id: ID!, name: String, content: String): Comment
-    removeComment: Comment
+    addComment(postId: ID!, content: String): Post
+    updateComment(_id: ID!, name: String, content: String): Post
+    removeComment(postId: ID!, commentId: ID!): Post
   }
 `;
 
 module.exports = typeDefs;
-// # postsByAuthor (authorId: ID!): [Post]
-// createMatchup(tech1: String!, tech2: String!): Matchup
-// createVote(_id: String!, techNum: Int!): Matchup
