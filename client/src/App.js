@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import SinglePost from "./pages/SinglePost";
 import BsAdmin from "./pages/BsAdmin";
 import {
   ApolloClient,
@@ -49,6 +50,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/BsAdmin" element={<BsAdmin />} />
             <Route path="/Blog" element={<Blog />} />
+            <Route path="/Blog/:postId" element={<SinglePost />} />
             <Route path="contact" element={<Contact />} />
           </Routes>
         </Router>

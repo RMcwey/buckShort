@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require("mongoose");
-
+const dateFormat = require("../utils/dateFormat");
 const postSchema = new Schema({
   title: {
     type: String,
@@ -16,8 +16,18 @@ const postSchema = new Schema({
   },
   comments: [
     {
-      type: Types.ObjectId,
-      ref: "Post",
+      content: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      author: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 30,
+      },
     },
   ],
 });

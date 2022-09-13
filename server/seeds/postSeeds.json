@@ -2,11 +2,13 @@
   {
     "postId": "101",
     "title": "The First Test",
-    "content": "This is the first test post for a buck short productions"
+    "content": "This is the first test post for a buck short productions",
+    "author": "Alex Harkins"
   },
   {
     "postId": "102",
     "title": "The Second Test",
-    "content": "This is the second test post for a buck short productions"
+    "content": "This is the second test post for a buck short productions",
+    "author": "Alex Harkins"
   }
 ]
