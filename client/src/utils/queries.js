@@ -39,9 +39,9 @@ export const QUERY_SINGLE_POST = gql`
       author
       comments {
         _id
-        title
         author
         content
+        createdAt
       }
     }
   }

@@ -7,21 +7,20 @@ const typeDefs = gql`
     email: String
     password: String
     posts: [Post]
-    comments: [Comment]
   }
 
   type Post {
     _id: ID
     title: String
-    author: String
     content: String
+    author: String
     comments: [Comment]!
   }
 
   type Comment {
     _id: ID
-    author: String
     content: String
+    author: String
     createdAt: String
   }
 
@@ -44,10 +43,10 @@ const typeDefs = gql`
     updateUser(_id: ID!, name: String, email: String, password: String): User
     removeUser: User
     addPost(title: String, authorId: ID, content: String): Post
-    updatePost(_id: ID!, name: String, content: String): Post
+    updatePost(_id: ID!, author: String, content: String): Post
     removePost: Post
-    addComment(postId: ID!, content: String): Post
-    updateComment(_id: ID!, name: String, content: String): Post
+    addComment(postId: ID!, content: String, author: String): Post
+    updateComment(_id: ID!, author: String, content: String): Post
     removeComment(postId: ID!, commentId: ID!): Post
   }
 `;

@@ -34,6 +34,7 @@ export const ADD_POST = gql`
       comments {
         _id
         content
+        author
       }
     }
   }
@@ -45,12 +46,7 @@ export const ADD_COMMENT = gql`
       _id
       content
       author
-      comments {
-        _id
-        content
-        author
-        createdAt
-      }
+      createdAt
     }
   }
 `;

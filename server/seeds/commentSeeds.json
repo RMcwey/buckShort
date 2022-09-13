@@ -1,12 +1,12 @@
 [
   {
     "commentId": "201",
-    "title": "The first comment!",
-    "content": "This is the first comment on a buck short productions"
+    "content": "This is the first comment on a buck short productions",
+    "author": "Alex Harkins"
   },
   {
     "commentId": "202",
-    "title": "The second comment!",
-    "content": "This is the second comment on a buck short productions"
+    "content": "This is the second comment on a buck short productions",
+    "author": "Alex Harkins"
   }
 ]

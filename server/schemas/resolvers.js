@@ -5,7 +5,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return await User.findOne({ _id: userId }).populate("posts");
+      return await User.findOne({ name: author }).populate("posts");
     },
     allUsers: async () => {
       return await User.find().populate("posts");
@@ -14,7 +14,8 @@ const resolvers = {
       return await Post.findOne({ _id: postId });
     },
     allPosts: async (parent, { userId }) => {
-      return await Post.find(params).populate("posts");
+      const params = userId ? { userId } : {};
+      return await Post.find(params);
     },
     //   comment: async (parent, { commentId }) => {
     //     return await Comment.findOne({ _id: commentId })
@@ -87,14 +88,14 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { allPosts: post._id } }
+          { $addToSet: { posts: post._id } }
         );
 
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    addComment: async (parent, { postId, content }) => {
+    addComment: async (parent, { postId, content, author }) => {
       return Post.findOneAndUpdate(
         { _id: postId },
         {
@@ -107,6 +108,23 @@ const resolvers = {
           runValidators: true,
         }
       );
+    },
+    removeComment: async (parent, { postId, commentId }, context) => {
+      if (context.user) {
+        return Thought.findOneAndUpdate(
+          { _id: postId },
+          {
+            $pull: {
+              comments: {
+                _id: commentId,
+                author,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

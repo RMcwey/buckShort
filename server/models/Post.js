@@ -19,10 +19,14 @@ const postSchema = new Schema({
       content: {
         type: String,
         required: true,
+        minlength: 1,
+        maxlength: 280,
       },
       author: {
         type: String,
         required: true,
+        minlength: 1,
+        maxlength: 30,
       },
       createdAt: {
         type: Date,
