@@ -3,6 +3,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../../utils/mutations";
 import { QUERY_POSTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   Box,
   Button,
@@ -54,7 +56,7 @@ export default function BlogForm() {
     const { name, value } = event.target;
 
     if (name === "content" && value.length <= 1000) {
-      setContent(value);
+      // setContent(value);
       setCharacterCount(value.length);
     } else if (name === "title") {
       setTitle(value);
@@ -93,7 +95,19 @@ export default function BlogForm() {
               ></TextField>
               Character Count: {characterCount}/1000
             </Typography>
-            <TextareaAutosize
+            <CKEditor
+              editor={ClassicEditor}
+              data=""
+              onReady={(editor) => {
+                // You can store the "editor" and use when it is needed.
+                console.log("Editor is ready to use!", editor);
+              }}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setContent(data);
+              }}
+            />
+            {/* <TextareaAutosize
               aria-label="minimum height"
               minRows={5}
               name="content"
@@ -101,7 +115,7 @@ export default function BlogForm() {
               className="form-input"
               value={content}
               onChange={handleChange}
-            ></TextareaAutosize>
+            ></TextareaAutosize> */}
             <Button
               sx={{ mt: 1 }}
               type="submit"
