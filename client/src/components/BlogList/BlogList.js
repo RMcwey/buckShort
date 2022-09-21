@@ -5,6 +5,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import parse from "html-react-parser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -39,9 +40,9 @@ const BlogList = ({ allPosts, title, showTitle = true }) => {
                     <Link underline="hover" href={`/Blog/${post._id}`}>
                       {post.title} <br />
                     </Link>
-                    <Typography>{post.content}</Typography>
                   </Box>
                 </Typography>
+                <div>{parse(post.content)}</div>
                 <Typography sx={{ color: "secondary.main" }}>
                   Posted by {post.author}
                 </Typography>

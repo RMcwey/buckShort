@@ -105,6 +105,7 @@ export default function BlogForm() {
               onChange={(event, editor) => {
                 const data = editor.getData();
                 setContent(data);
+                //setContent(parser.parse(data));
               }}
             />
             {/* <TextareaAutosize
