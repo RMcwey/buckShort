@@ -9,6 +9,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import parse from "html-react-parser";
 
 const SinglePost = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
@@ -42,7 +43,7 @@ const SinglePost = () => {
             >
               {post.title}
             </Typography>
-            <Typography>{post.content}</Typography>
+            <Typography>{parse(post.content)}</Typography>
           </Box>
           <Typography variant="body2">Posted by {post.author}</Typography>
         </CardContent>
