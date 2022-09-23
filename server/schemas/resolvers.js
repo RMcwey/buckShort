@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post } = require("../models");
+const { User, Post, Comment, Review, Event } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -11,26 +11,29 @@ const resolvers = {
       return await User.find().populate("posts");
     },
     post: async (parent, { postId }) => {
-      return await Post.findOne({ _id: postId });
+      return await Post.findOne({ _id: postId }).populate("comments");
     },
-    allPosts: async (parent, { userId }) => {
-      const params = userId ? { userId } : {};
-      return await Post.find(params);
+    allPosts: async () => {
+      return await Post.find().populate("comments");
     },
-    //   comment: async (parent, { commentId }) => {
-    //     return await Comment.findOne({ _id: commentId })
-    //       .populate("originalPost")
-    //       .populate({
-    //         path: "originalPost",
-    //         populate: "comments",
-    //       });
-    //   },
-    //   allComments: async () => {
-    //     return await Comment.find({}).populate("originalPost").populate({
-    //       path: "originalPost",
-    //       populate: "comments",
-    //     });
-    //   },
+    comment: async (parent, { commentId }) => {
+      return await Comment.findOne({ _id: commentId });
+    },
+    allComments: async () => {
+      return await Comment.find();
+    },
+    review: async (parent, { reviewId }) => {
+      return await Review.findOne({ _id: reviewId });
+    },
+    allReviews: async () => {
+      return await Review.find();
+    },
+    event: async (parent, { eventId }) => {
+      return await Event.findOne({ _id: eventId });
+    },
+    allEvents: async () => { 
+      return await Event.find();
+    },
   },
   Mutation: {
     addUser: async (parent, { name, email, password }) => {
@@ -71,10 +74,9 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in");
     },
-
     removeUser: async (parent, args, context) => {
       if (context.user) {
-        return User.findOneAndUpdate({ _id: context.user._id });
+        return User.findOneAndDelete({ _id: context.user._id });
       }
       throw new AuthenticationError("You need to be logged in");
     },
@@ -95,6 +97,36 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    updatePost: async (parent, {postId, title, content}, context) => {
+      if (context.user) {
+        return await Post.findOneAndUpdate(
+          {_id: postId},
+          {
+            $set: {
+              title: title,
+              content: content,
+            },
+          },
+          {new: true}
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removePost: async (parent, { postId, userId }, context) => {
+      if (context.user) {
+        const post = await Post.findOneAndDelete({
+          _id: postId,
+          author: context.user.name,
+        });
+        await User.findOneAndUpdate(
+          { _id: context.user_id },
+          { $pull: { posts: post._id } },
+          { new: true }
+        );
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     addComment: async (parent, { postId, content, author }) => {
       return Post.findOneAndUpdate(
         { _id: postId },
@@ -111,13 +143,13 @@ const resolvers = {
     },
     removeComment: async (parent, { postId, commentId }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
+        return Post.findOneAndUpdate(
           { _id: postId },
           {
             $pull: {
               comments: {
                 _id: commentId,
-                author,
+                // author: author,
               },
             },
           },

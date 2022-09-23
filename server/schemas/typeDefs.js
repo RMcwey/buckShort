@@ -27,7 +27,6 @@ const typeDefs = gql`
 
   type Review {
     _id: ID
-    title: String
     author: String
     content: String
     createdAt: String
@@ -51,17 +50,25 @@ const typeDefs = gql`
     allUsers: [User]
     post(postId: ID!): Post
     allPosts: [Post]
-    me: User
+    comment(commentId: ID!): Comment
+    allComments: [Comment]
+    review(reviewId: ID!): Review
+    allReviews: [Review]
+    event(eventId: ID!): Event
+    allEvents: [Event]
   }
 
   type Mutation {
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, name: String, email: String, password: String): User
-    removeUser: User
+    removeUser(userId: ID!, postId: ID!): User
     addPost(title: String, authorId: ID, content: String): Post
     updatePost(_id: ID!, author: String, content: String): Post
-    removePost: Post
+    removePost(postId: ID!): Post
+    addComment(commentId: ID!, content: String, author: String): Post
+    updateComment(_id: ID!, author: String, content: String): Post
+    removeComment(postId: ID!, commentId: ID!): Post
     addComment(postId: ID!, content: String, author: String): Post
     updateComment(_id: ID!, author: String, content: String): Post
     removeComment(postId: ID!, commentId: ID!): Post

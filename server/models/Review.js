@@ -1,10 +1,6 @@
 const { Schema, model, Types } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 const reviewSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
   author: {
     type: String,
     required: true,
