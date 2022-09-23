@@ -3,8 +3,6 @@ import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../../utils/mutations";
 import { QUERY_POSTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   Box,
   Button,
@@ -13,12 +11,12 @@ import {
   TextField,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import TextEditor from "../TextEditor/TextEditor";
 
-export default function BlogForm() {
-  const [content, setContent] = useState("");
+export default function BlogForm(props) {
   const [title, setTitle] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
-
+  const [content, setContent] = useState("");
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
@@ -95,19 +93,7 @@ export default function BlogForm() {
               ></TextField>
               Character Count: {characterCount}/1000
             </Typography>
-            <CKEditor
-              editor={ClassicEditor}
-              data=""
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setContent(data);
-                //setContent(parser.parse(data));
-              }}
-            />
+            <TextEditor setContent={setContent} />
             {/* <TextareaAutosize
               aria-label="minimum height"
               minRows={5}
