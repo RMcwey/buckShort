@@ -1,11 +1,7 @@
 const { Schema, model, Types } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
-const postSchema = new Schema({
+const reviewSchema = new Schema({
   title: {
-    type: String,
-    required: true,
-  },
-  content: {
     type: String,
     required: true,
   },
@@ -13,6 +9,10 @@ const postSchema = new Schema({
     type: String,
     required: true,
     trim: true,
+  },
+  content: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
@@ -37,6 +37,6 @@ const postSchema = new Schema({
   ],
 });
 
-const Post = model("Post", postSchema);
+const Review = model("Review", reviewSchema);
 
-module.exports = Post;
+module.exports = Review;

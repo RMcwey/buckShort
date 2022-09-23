@@ -14,6 +14,7 @@ const typeDefs = gql`
     title: String
     content: String
     author: String
+    createdAt: String
     comments: [Comment]!
   }
 
@@ -21,6 +22,22 @@ const typeDefs = gql`
     _id: ID
     content: String
     author: String
+    createdAt: String
+  }
+
+  type Review {
+    _id: ID
+    title: String
+    author: String
+    content: String
+    createdAt: String
+    comments: [Comment]!
+  }
+
+  type Event {
+    _id:ID
+    title: String
+    content: String
     createdAt: String
   }
 
