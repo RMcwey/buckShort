@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import ReviewsForm from "../components/ReviewsForm/ReviewsForm";
+import ReviewForm from "../components/ReviewForm/ReviewForm";
 import Auth from "../utils/auth";
 
 const Reviews = () => {
@@ -23,7 +23,7 @@ const Reviews = () => {
             }}
           >
             <CardContent>
-              <ReviewsForm
+              <ReviewForm
                 sx={{ flexDirection: "column", justifyContent: "center" }}
               />
             </CardContent>
@@ -33,13 +33,13 @@ const Reviews = () => {
             <div>Loading...</div>
           ) : (
             <Box>
-              <ReviewsList allPosts={allPosts} title="Buck Short Reviews" />
+              <ReviewsList allReviews={allReviews} title="Buck Short Reviews" />
             </Box>
           )} */}
         </Container>
       ) : (
         <Box>
-          {/* <BlogList allPosts={allPosts} title="Buck Short Reviews" /> */}
+          {/* <BlogList allReviews={allReviews} title="Buck Short Reviews" /> */}
         </Box>
       )}
     </div>

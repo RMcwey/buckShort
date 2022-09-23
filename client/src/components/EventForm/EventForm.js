@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 // import { useMutation } from "@apollo/client";
-// import { ADD_REVIEW } from "../../utils/mutations";
-// import { QUERY_REVIEWS } from "../../utils/queries";
+// import { ADD_EVENT } from "../../utils/mutations";
+// import { QUERY_EVENTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import { Box, Button, Typography, TextField } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import TextEditor from "../TextEditor/TextEditor";
 
-export default function ReviewsForm() {
+export default function EventForm() {
   const [content, setContent] = useState("");
-  //   const [addReview, { error }] = useMutation(ADD_REVIEW, {
-  //     update(cache, { data: { addReview } }) {
+  //   const [addEvent, { error }] = useMutation(ADD_EVENT, {
+  //     update(cache, { data: { addEvent } }) {
   //       try {
-  //         const { allPosts } = cache.readQuery({ query: QUERY_POSTS });
+  //         const { allEvents } = cache.readQuery({ query: QUERY_EVENTS });
 
   //         cache.writeQuery({
-  //           query: QUERY_POSTS,
-  //           data: { allPosts: [addReview, ...allPosts] },
+  //           query: QUERY_EVENTS,
+  //           data: { allEvents: [addEvent, ...allEvents] },
   //         });
   //       } catch (e) {
   //         console.error(e);
@@ -28,7 +28,7 @@ export default function ReviewsForm() {
     event.preventDefault();
 
     // try {
-    //   await addReview({
+    //   await addEvent({
     //     variables: {
     //       content,
     //       author: Auth.getProfile().data.name,
@@ -44,10 +44,10 @@ export default function ReviewsForm() {
     <>
       {Auth.loggedIn() ? (
         <Box sx={{ mt: 3 }}>
-          <Typography variant="h4">Post a Review</Typography>
+          <Typography variant="h4">Post an Event</Typography>
           <Box
             component="form"
-            className="reviewForm"
+            className="eventForm"
             onSubmit={handleFormSubmit}
             noValidate
             sx={{
