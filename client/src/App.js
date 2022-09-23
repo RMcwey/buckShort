@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import Reviews from "./pages/Reviews";
+import Events from "./pages/Events";
 import SinglePost from "./pages/SinglePost";
 import BsAdmin from "./pages/BsAdmin";
 import {
@@ -52,6 +54,8 @@ function App() {
             <Route path="/Blog" element={<Blog />} />
             <Route path="/Blog/:postId" element={<SinglePost />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="reviews" element={<Reviews />} />
+            <Route path="events" element={<Events />} />
           </Routes>
         </Router>
       </ApolloProvider>
