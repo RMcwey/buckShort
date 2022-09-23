@@ -5,6 +5,7 @@ import { QUERY_POSTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ImageInsert from "@ckeditor/ckeditor5-image/src/imageinsert";
 import {
   Box,
   Button,
