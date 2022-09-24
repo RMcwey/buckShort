@@ -7,8 +7,11 @@ import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import EventForm from "../components/EventForm/EventForm";
+// import EventList from "../components/EventList/EventList";
 
 const Events = () => {
+  // const { loading, data } = useQuery(QUERY_EVENTS);
+  // const allEvents = data?.allEvents || [];
   return (
     <div className="event-card">
       {Auth.loggedIn() ? (
@@ -33,13 +36,13 @@ const Events = () => {
             <div>Loading...</div>
           ) : (
             <Box>
-              <EventsList allEvents={allEvents} title="Buck Short Events" />
+              <EventList allEvents={allEvents} title="Buck Short Events" />
             </Box>
           )} */}
         </Container>
       ) : (
         <Box>
-          {/* <BlogList allEvents={allEvents} title="Buck Short Events" /> */}
+          {/* <EventList allEvents={allEvents} title="Buck Short Events" /> */}
         </Box>
       )}
     </div>

@@ -6,9 +6,12 @@ import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import ReviewForm from "../components/ReviewForm/ReviewForm";
+// import ReviewList from "../components/ReviewList/ReviewList";
 import Auth from "../utils/auth";
 
 const Reviews = () => {
+  // const { loading, data } = useQuery(QUERY_REVIEWS);
+  // const allReviews = data?.allReviews || [];
   return (
     <div className="review-card">
       {Auth.loggedIn() ? (
@@ -33,7 +36,7 @@ const Reviews = () => {
             <div>Loading...</div>
           ) : (
             <Box>
-              <ReviewsList allReviews={allReviews} title="Buck Short Reviews" />
+              <ReviewList allReviews={allReviews} title="Buck Short Reviews" />
             </Box>
           )} */}
         </Container>
