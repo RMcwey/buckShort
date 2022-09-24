@@ -25,10 +25,10 @@ const userSchema = new Schema({
       ref: "Post",
     },
   ],
-  comments: [
+  reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Comment",
+      ref: "Review",
     },
   ],
 });

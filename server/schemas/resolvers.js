@@ -1,14 +1,14 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post, Comment, Review, Event } = require("../models");
+const { User, Post, Review, Event } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     user: async (parent, { userId }) => {
-      return await User.findOne({ name: author }).populate("posts");
+      return await User.findOne({ name: author }).populate("posts").populate("reviews");
     },
     allUsers: async () => {
-      return await User.find().populate("posts");
+      return await User.find().populate("posts").populate("reviews");
     },
     post: async (parent, { postId }) => {
       return await Post.findOne({ _id: postId }).populate("comments");
@@ -23,10 +23,16 @@ const resolvers = {
       return await Comment.find();
     },
     review: async (parent, { reviewId }) => {
-      return await Review.findOne({ _id: reviewId });
+      return await Review.findOne({ _id: reviewId }).populate("revComments");
     },
     allReviews: async () => {
-      return await Review.find();
+      return await Review.find().populate("revComments");
+    },
+    revComment: async (parent, { revCommentId }) => {
+      return await RevComment.findOne({ _id: revCommentId });
+    },
+    allRevComments: async () => {
+      return await RevComment.find();
     },
     event: async (parent, { eventId }) => {
       return await Event.findOne({ _id: eventId });
@@ -60,7 +66,7 @@ const resolvers = {
 
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        return await User.findOneAndUpdate(
           { _id: args._id },
           {
             $set: {
@@ -76,7 +82,7 @@ const resolvers = {
     },
     removeUser: async (parent, args, context) => {
       if (context.user) {
-        return User.findOneAndDelete({ _id: context.user._id });
+        return await User.findOneAndDelete({ _id: context.user._id });
       }
       throw new AuthenticationError("You need to be logged in");
     },
@@ -112,7 +118,7 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    removePost: async (parent, { postId, userId }, context) => {
+    removePost: async (parent, { postId }, context) => {
       if (context.user) {
         const post = await Post.findOneAndDelete({
           _id: postId,
@@ -128,7 +134,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     addComment: async (parent, { postId, content, author }) => {
-      return Post.findOneAndUpdate(
+      return await Post.findOneAndUpdate(
         { _id: postId },
         {
           $addToSet: {
@@ -141,9 +147,21 @@ const resolvers = {
         }
       );
     },
+    // updateComment: async (parent, {commentId, content, author}) => {
+    //   return await Comment.findOneAndUpdate(
+    //     {_id: commentId},
+    //     {
+    //       $set: {
+    //         content: content,
+    //         author: author,
+    //       },
+    //     },
+    //     {new: true}
+    //   );
+    // },
     removeComment: async (parent, { postId, commentId }, context) => {
       if (context.user) {
-        return Post.findOneAndUpdate(
+        return await Post.findOneAndUpdate(
           { _id: postId },
           {
             $pull: {
@@ -155,6 +173,128 @@ const resolvers = {
           },
           { new: true }
         );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addReview: async (parent, { content }, context) => {
+      if (context.user) {
+        const review = await Review.create({
+          content,
+          author: context.user.name,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { reviews: review._id } }
+        );
+
+        return review;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    updateReview: async (parent, { reviewId, content }, context) => {
+      if (context.user) {
+        return await Review.findOneAndUpdate(
+          {_id: reviewId},
+          {
+            $set: {
+              content: content,
+            },
+          },
+          {new: true}
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeReview: async (parent, { reviewId }, context) => {
+      if (context.user) {
+        const review = await Review.findOneAndDelete({
+          _id: reviewId,
+          author: context.user.name,
+        });
+        await User.findOneAndUpdate(
+          { _id: context.user_id },
+          { $pull: { reviews: review._id } },
+          { new: true }
+        );
+        return review;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addRevComment: async (parent, { reviewId, content, author }) => {
+      return await Review.findOneAndUpdate(
+        { _id: reviewId },
+        {
+          $addToSet: {
+            revComments: { content, author },
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeRevComment: async (parent, { reviewId, revCommentId }, context) => {
+      if (context.user) {
+        return await Review.findOneAndUpdate(
+          { _id: reviewId },
+          {
+            $pull: {
+              revComments: {
+                _id: revCommentId,
+              },
+            },
+          },
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    addEvent: async (parent, { title, content }, context) => {
+      if (context.user) {
+        const review = await Event.create({
+          title,
+          content,
+          // author: context.user.name,
+        });
+
+        // await User.findOneAndUpdate(
+        //   { _id: context.user._id },
+        //   { $addToSet: { posts: review._id } }
+        // );
+
+        return review;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    updateEvent: async (parent, { eventId, title, content }, context) => {
+      if (context.user) {
+        return await Event.findOneAndUpdate(
+          {_id: eventId},
+          {
+            $set: {
+              title: title,
+              content: content,
+            },
+          },
+          {new: true}
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeEvent: async (parent, { eventId }, context) => {
+      if (context.user) {
+        const event = await Event.findOneAndDelete({
+          _id: eventId,
+          // author: context.user.name,
+        });
+        // await User.findOneAndUpdate(
+        //   { _id: context.user_id },
+        //   { $pull: { reviews: review._id } },
+        //   { new: true }
+        // );
+        return event;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

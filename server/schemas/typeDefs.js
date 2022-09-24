@@ -6,7 +6,8 @@ const typeDefs = gql`
     name: String
     email: String
     password: String
-    posts: [Post]
+    posts: [Post]!
+    reviews: [Review]!
   }
 
   type Post {
@@ -27,10 +28,17 @@ const typeDefs = gql`
 
   type Review {
     _id: ID
-    author: String
     content: String
+    author: String
     createdAt: String
-    comments: [Comment]!
+    revComments: [RevComment]!
+  }
+
+  type RevComment {
+    _id: ID
+    content: String
+    author: String
+    creatdAt: String
   }
 
   type Event {
@@ -54,6 +62,8 @@ const typeDefs = gql`
     allComments: [Comment]
     review(reviewId: ID!): Review
     allReviews: [Review]
+    revComment(revCommentId: ID!): RevComment
+    allRevComments: [RevComment]
     event(eventId: ID!): Event
     allEvents: [Event]
   }
@@ -63,15 +73,19 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, name: String, email: String, password: String): User
     removeUser(userId: ID!, postId: ID!): User
-    addPost(title: String, authorId: ID, content: String): Post
-    updatePost(_id: ID!, author: String, content: String): Post
+    addPost(title: String, content: String): Post
+    updatePost(_id: ID!, title: String, content: String): Post
     removePost(postId: ID!): Post
-    addComment(commentId: ID!, content: String, author: String): Post
-    updateComment(_id: ID!, author: String, content: String): Post
-    removeComment(postId: ID!, commentId: ID!): Post
     addComment(postId: ID!, content: String, author: String): Post
-    updateComment(_id: ID!, author: String, content: String): Post
     removeComment(postId: ID!, commentId: ID!): Post
+    addReview(content: String): Review
+    updateReview(_id: ID!, content: String): Review
+    removeReview(reviewId: ID!): Review
+    addRevComment(reviewId: ID!, content: String, author: String): Review
+    removeRevComment(reviewId: ID!, revCommentId: ID!): Review
+    addEvent(title: String, content: String): Event
+    updateEvent(_id: ID!, title: String, content: String): Event
+    removeEvent(eventId: ID!): Event
   }
 `;
 

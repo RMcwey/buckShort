@@ -10,12 +10,17 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  comments: [
+  revComments: [
     {
       content: {
         type: String,
@@ -28,6 +33,11 @@ const reviewSchema = new Schema({
         required: true,
         minlength: 1,
         maxlength: 30,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
       },
     },
   ],
