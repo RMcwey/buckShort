@@ -3,17 +3,11 @@ import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../../utils/mutations";
 import { QUERY_POSTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import {
-  Box,
-  Button,
-  Typography,
-  TextareaAutosize,
-  TextField,
-} from "@mui/material";
+import { Box, Button, Typography, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import TextEditor from "../TextEditor/TextEditor";
 
-export default function BlogForm(props) {
+export default function BlogForm() {
   const [title, setTitle] = useState("");
   const [characterCount, setCharacterCount] = useState(0);
   const [content, setContent] = useState("");
@@ -94,15 +88,6 @@ export default function BlogForm(props) {
               Character Count: {characterCount}/1000
             </Typography>
             <TextEditor setContent={setContent} />
-            {/* <TextareaAutosize
-              aria-label="minimum height"
-              minRows={5}
-              name="content"
-              placeholder="Enter your blog post..."
-              className="form-input"
-              value={content}
-              onChange={handleChange}
-            ></TextareaAutosize> */}
             <Button
               sx={{ mt: 1 }}
               type="submit"
