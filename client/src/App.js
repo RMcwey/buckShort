@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Reviews from "./pages/Reviews";
+import Store from "./pages/Store";
 import Events from "./pages/Events";
 import SinglePost from "./pages/SinglePost";
 import BsAdmin from "./pages/BsAdmin";
@@ -55,6 +56,7 @@ function App() {
             <Route path="/Blog/:postId" element={<SinglePost />} />
             <Route path="contact" element={<Contact />} />
             <Route path="reviews" element={<Reviews />} />
+            <Route path="store" element={<Store />} />
             <Route path="events" element={<Events />} />
           </Routes>
         </Router>
