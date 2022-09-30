@@ -38,7 +38,7 @@ const typeDefs = gql`
     _id: ID
     content: String
     author: String
-    creatdAt: String
+    createdAt: String
   }
 
   type Event {
