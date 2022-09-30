@@ -38,11 +38,11 @@ const typeDefs = gql`
     _id: ID
     content: String
     author: String
-    creatdAt: String
+    createdAt: String
   }
 
   type Event {
-    _id:ID
+    _id: ID
     title: String
     content: String
     createdAt: String
