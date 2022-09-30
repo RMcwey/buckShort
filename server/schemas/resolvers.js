@@ -10,6 +10,12 @@ const resolvers = {
     allUsers: async () => {
       return await User.find().populate("posts").populate("reviews");
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('posts').populate('reviews');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     post: async (parent, { postId }) => {
       return await Post.findOne({ _id: postId }).populate("comments");
     },

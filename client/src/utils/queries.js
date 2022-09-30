@@ -1,5 +1,46 @@
 import { gql } from "@apollo/client";
 
+export const QUERY_USER = gql`
+  query user($name: String!) {
+    user(name: $name) {
+      _id
+      name
+      email
+      posts {
+        _id
+        title
+        content
+      }
+      reviews {
+        _id
+        content
+        author
+        createdAt
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_USERS = gql`
+  query getAllUsers {
+    allUsers {
+      _id
+      name
+      email
+      posts {
+        _id
+        title
+        content
+      }
+      reviews {
+        _id
+        content
+        author
+        createdAt
+      }
+    }
+  }`
+
 export const QUERY_ME = gql`
   query me {
     me {
@@ -11,20 +52,11 @@ export const QUERY_ME = gql`
         title
         content
       }
-    }
-  }
-`;
-
-export const QUERY_USER = gql`
-  query user($name: String!) {
-    user(name: $name) {
-      _id
-      name
-      email
-      posts {
+      reviews {
         _id
-        title
         content
+        author
+        createdAt
       }
     }
   }
@@ -37,10 +69,12 @@ export const QUERY_SINGLE_POST = gql`
       title
       content
       author
+      createdAt
       comments {
         _id
         author
         content
+        createdAt
       }
     }
   }
@@ -53,6 +87,7 @@ export const QUERY_POSTS = gql`
       title
       content
       author
+      createdAt
     }
   }
 `;
