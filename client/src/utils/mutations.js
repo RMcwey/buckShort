@@ -56,6 +56,26 @@ export const ADD_POST = gql`
   }
 `;
 
+export const UPDATE_POST = gql`
+  mutation updatePost($_id: ID!, $title: String, $content: String) {
+    updateUser(_id: $_id, title: $title, content: $content) {
+      _id
+      title
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_POST = gql`
+  mutation removePost($postId: ID!) {
+    removePost(postId: $postId) {
+      _id
+    }
+  }
+`;
+
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $content: String!, $author: String!) {
     addComment(postId: $postId, content: $content, author: $author) {
