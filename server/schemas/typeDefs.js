@@ -73,7 +73,7 @@ const typeDefs = gql`
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, name: String, email: String, password: String): User
-    removeUser(userId: ID!, postId: ID!): User
+    removeUser(userId: ID!): User
     addPost(title: String, content: String): Post
     updatePost(_id: ID!, title: String, content: String): Post
     removePost(postId: ID!): Post

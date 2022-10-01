@@ -37,8 +37,8 @@ export const UPDATE_USER = gql`
 `;
 
 export const REMOVE_USER = gql`
-  mutation removeUser($userId: ID!, $postId: ID!) {
-    removeUser(userId: $userId, postId: $postID) {
+  mutation removeUser($userId: ID!) {
+    removeUser(userId: $userId) {
       _id
     }
   }
@@ -51,11 +51,7 @@ export const ADD_POST = gql`
       title
       content
       author
-      comments {
-        _id
-        content
-        author
-      }
+      createdAt
     }
   }
 `;
@@ -66,6 +62,7 @@ export const ADD_COMMENT = gql`
       _id
       content
       author
+      createdAt
     }
   }
 `;
