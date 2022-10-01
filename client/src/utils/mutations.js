@@ -87,20 +87,9 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-export const UPDATE_COMMENT = gql`
-  mutation updateComment($postId: ID!, $content: String, $author: String) {
-    updateUser(postId: $postId, content: $content, author: $author) {
-      _id
-      content
-      author
-      createdAt
-    }
-  }
-`;
-
 export const REMOVE_COMMENT = gql`
-  mutation removeComment($commentId: ID!) {
-    removeComment(commentId: $commentId) {
+  mutation removeComment($postId: ID!, $commentId: ID!) {
+    removeComment(postId: $postId, commentId: $commentId) {
       _id
     }
   }
@@ -131,6 +120,25 @@ export const UPDATE_REVIEW = gql`
 export const REMOVE_REVIEW = gql`
   mutation removeReview($reviewId: ID!) {
     removeReview(reviewId: $reviewId) {
+      _id
+    }
+  }
+`;
+
+export const ADD_REVCOMMENT = gql`
+  mutation addRevComment($reviewId: ID!, $content: String!, $author: String!) {
+    addComment(reviewId: $reviewId, content: $content, author: $author) {
+      _id
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_REVCOMMENT = gql`
+  mutation removeComment($reviewId: reviewId, $revCommentId: ID!) {
+    removeComment($reviewId: reviewId, revCommentId: $revCommentId) {
       _id
     }
   }
