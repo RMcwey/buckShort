@@ -143,3 +143,33 @@ export const REMOVE_REVCOMMENT = gql`
     }
   }
 `;
+
+export const ADD_EVENT = gql`
+  mutation addEvent($title: String!, $content: String!) {
+    addPost(title: $title, content: $content) {
+      _id
+      title
+      content
+      createdAt
+    }
+  }
+`;
+
+export const UPDATE_EVENT = gql`
+  mutation updateReview($_id: ID!, $title: String, $content: String) {
+    updateReview(_id: $_id, title: $title, content: $content) {
+      _id
+      title
+      content
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_EVENT = gql`
+  mutation removeEvent($eventId: ID!) {
+    removeEvent(eventId: $eventId) {
+      _id
+    }
+  }
+`;
