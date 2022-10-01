@@ -105,3 +105,33 @@ export const REMOVE_COMMENT = gql`
     }
   }
 `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview($content: String!) {
+    addPost(content: $content) {
+      _id
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
+export const UPDATE_REVIEW = gql`
+  mutation updateReview($_id: ID!, $content: String) {
+    updateReview(_id: $_id, content: $content) {
+      _id
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
+export const REMOVE_REVIEW = gql`
+  mutation removeReview($reviewId: ID!) {
+    removeReview(reviewId: $reviewId) {
+      _id
+    }
+  }
+`;
