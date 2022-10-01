@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_POST } from "../../utils/mutations";
-import { QUERY_POSTS } from "../../utils/queries";
+import { QUERY_ALL_POSTS } from "../../utils/queries";
 import Auth from "../../utils/auth";
 import { Box, Button, Typography, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -14,10 +14,10 @@ export default function BlogForm() {
   const [addPost, { error }] = useMutation(ADD_POST, {
     update(cache, { data: { addPost } }) {
       try {
-        const { allPosts } = cache.readQuery({ query: QUERY_POSTS });
+        const { allPosts } = cache.readQuery({ query: QUERY_ALL_POSTS });
 
         cache.writeQuery({
-          query: QUERY_POSTS,
+          query: QUERY_ALL_POSTS,
           data: { allPosts: [addPost, ...allPosts] },
         });
       } catch (e) {
